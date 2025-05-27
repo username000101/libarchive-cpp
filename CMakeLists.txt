@@ -17,6 +17,3 @@ else ()
     message(WARNING "Trying to find the libarchive.so in default paths...")
     target_link_libraries(archive-cpp PRIVATE libarchive.so)
 endif ()
-
-target_include_directories(archive-cpp PRIVATE include libarchive.so)
-
