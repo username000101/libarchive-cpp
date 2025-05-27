@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 find_package(PkgConfig)
 
-add_library(archive-cpp STATIC
+add_library(archive-cpp OBJECT
         src/GetFiles.cpp
         src/Extract.cpp
 )
