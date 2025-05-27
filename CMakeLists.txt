@@ -5,27 +5,18 @@ set(CMAKE_CXX_STANDARD 23)
 
 find_package(PkgConfig)
 
-add_library(archive-cpp OBJECT
+add_library(archive-cpp SHARED
         src/GetFiles.cpp
         src/Extract.cpp
 )
 
-if (PkgConfig_FOUND)
-    pkg_check_modules(LIBARCHIVE QUIET)
-    if (LIBARCHIVE_FOUND)
-        target_link_libraries(archive-cpp PRIVATE ${LIBARCHIVE_LIBRARIES})
-    else ()
-        if (libarchive_library)
-            target_link_libraries(archive-cpp PRIVATE ${libarchive_library})
-        else ()
-            message(FATAL_ERROR "You need to specify the libarchive_library variable or install libarchive with PkgConfig")
-        endif ()
-    endif ()
+
+if (libarchive_library)
+    target_link_libraries(archive-cpp PRIVATE ${libarchive_library})
 else ()
-    if (libarchive_library)
-        target_link_libraries(libarchive-cpp PRIVATE ${libarchive_library})
-    else ()
-    endif ()
+    message(WARNING "Trying to find the libarchive.so in default paths...")
+    target_link_libraries(archive-cpp PRIVATE libarchive.so)
 endif ()
 
-target_include_directories(archive-cpp PUBLIC include)
+target_include_directories(archive-cpp PRIVATE include libarchive.so)
+
