@@ -11,6 +11,8 @@ add_library(archive-cpp SHARED
 )
 
 
+target_include_directories(archive-cpp PUBLIC include)
+
 if (libarchive_library)
     target_link_libraries(archive-cpp PRIVATE ${libarchive_library})
 else ()
