@@ -3,8 +3,6 @@ project(libarchive_cpp)
 
 set(CMAKE_CXX_STANDARD 23)
 
-find_package(PkgConfig)
-
 add_library(archive-cpp SHARED
         src/GetFiles.cpp
         src/Extract.cpp
