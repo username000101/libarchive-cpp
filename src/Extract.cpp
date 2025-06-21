@@ -11,7 +11,7 @@ std::filesystem::path libarchive::Archive::extract(std::filesystem::path output_
 
     this->archive_support_all(archive);
 
-    archive_read_open_filename(archive, this->archive_file_.c_str(), 10240);
+    archive_read_open_filename(archive, this->archive_file_.string().c_str(), 10240);
     while (archive_read_next_header(archive, &entry) == ARCHIVE_OK) {
         auto tmp_path = (output_dir / archive_entry_pathname(entry)).string();
         archive_entry_set_pathname(entry, tmp_path.c_str());
