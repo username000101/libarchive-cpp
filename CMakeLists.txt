@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_subdirectory(third_party/libarchive)
 
-add_library(archive-cpp SHARED
+add_library(archive-cpp STATIC
         src/GetFiles.cpp
         src/Extract.cpp
 )
