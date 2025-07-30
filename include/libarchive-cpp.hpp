@@ -1,5 +1,6 @@
 #pragma once
 
+#include <expected>
 #include <filesystem>
 
 #include <archive.h>
@@ -13,8 +14,8 @@ namespace libarchive {
         Archive(std::filesystem::path file) : archive_file_(file) {}
 
         enum EntryType { FILE, DIRECTORY };
-        std::vector<std::pair<EntryType, std::filesystem::path>> get_files();
-        std::filesystem::path extract(std::filesystem::path output_dir);
+        std::expected<std::vector<std::pair<EntryType, std::filesystem::path>>, std::string> get_files();
+        std::expected<std::filesystem::path, std::string> extract(std::filesystem::path output_dir);
 
     private:
         void archive_support_all(archive* archive) {
